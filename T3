@@ -1,0 +1,184 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © yusufvuran
+
+//@version=5 
+indicator('(YusufT3)', overlay=true) 
+ 
+b = input(title='Factor', defval=0.7) 
+c1 = -b * b * b 
+c2 = 3 * b * b + 3 * b * b * b 
+c3 = -6 * b * b - 3 * b - 3 * b * b * b 
+c4 = 1 + 3 * b + b * b * b + 3 * b * b 
+//T3 calcs end 
+ 
+t3(len) => 
+    c1 * ta.ema(ta.ema(ta.ema(ta.ema(ta.ema(ta.ema(close, len), len), len), len), len), len) + c2 * ta.ema(ta.ema(ta.ema(ta.ema(ta.ema(close, len), len), len), len), len) + c3 * ta.ema(ta.ema(ta.ema(ta.ema(close, len), len), len), len) + c4 * ta.ema(ta.ema(ta.ema(close, len), len), len) 
+ 
+t3plot = t3(input(title='Period', defval=7)) 
+linewidth = input(title='Linewidth', defval=3) 
+colorsetting = input(title='Solid color', defval=false) 
+ 
+plot(t3plot, color=colorsetting ? color.aqua : t3plot > t3plot[1] ? color.green : color.red, linewidth=linewidth) 
+ 
+s01 = input.symbol('BIST:ENKAI') 
+s02 = input.symbol('BIST:SAHOL') 
+s03 = input.symbol('BIST:KCHOL') 
+s04 = input.symbol('BIST:ASTOR') 
+s05 = input.symbol('BIST:TTRAK') 
+s06 = input.symbol('BIST:GARAN') 
+s07 = input.symbol('BIST:TUPRS') 
+s08 = input.symbol('BIST:THYAO') 
+s09 = input.symbol('BIST:SISE') 
+s10 = input.symbol('BIST:EREGL') 
+s11 = input.symbol('BIST:ASELS') 
+s12 = input.symbol('BIST:TCELL') 
+s13 = input.symbol('BIST:SASA') 
+s14 = input.symbol('BIST:TABGD') 
+s15 = input.symbol('BIST:TTKOM') 
+s16 = input.symbol('BIST:KONTR') 
+s17 = input.symbol('BIST:PETKM') 
+s18 = input.symbol('BIST:AGHOL') 
+s19 = input.symbol('BIST:AGESA') 
+s20 = input.symbol('BIST:AKSUE') 
+s21 = input.symbol('BIST:ALMAD') 
+s22 = input.symbol('BIST:ANGEN') 
+s23 = input.symbol('BIST:ARSAN') 
+s24 = input.symbol('BIST:CEOEM') 
+s25 = input.symbol('BIST:CONSE') 
+s26 = input.symbol('BIST:PGSUS') 
+s27 = input.symbol('BIST:SISE') 
+s28 = input.symbol('BIST:BIMAS') 
+s29 = input.symbol('BIST:TKFEN') 
+s30 = input.symbol('BIST:KOZAA') 
+s31 = input.symbol('BIST:MGROS') 
+s32 = input.symbol('BIST:TCELL') 
+s33 = input.symbol('BIST:TSKB') 
+s34 = input.symbol('BIST:DOHOL') 
+s35 = input.symbol('BIST:TAVHL') 
+s36 = input.symbol('BIST:CANTE') 
+s37 = input.symbol('BIST:SASA') 
+s38 = input.symbol('BIST:ENJSA') 
+s39 = input.symbol('BIST:ODAS') 
+s40 = input.symbol('BIST:VESTL') 
+ 
+ 
+roundn(x, n) => 
+    mult = 1 
+    if n != 0 
+        for i = 1 to math.abs(n) by 1 
+            mult *= 10 
+            mult 
+ 
+    n >= 0 ? math.round(x * mult) / mult : math.round(x / mult) * mult 
+ 
+ 
+ 
+ 
+screenerFunc() => 
+    wt1 = t3plot 
+ 
+    cond = ta.crossover(t3plot,t3plot[1]) 
+    value = wt1 
+ 
+    [value, cond] 
+ 
+/////////////////////////////////////// 
+// Running Functions for all sybmols // 
+ 
+[v01, c01] = request.security(s01, timeframe.period, screenerFunc()) 
+[v02, c02] = request.security(s02, timeframe.period, screenerFunc()) 
+[v03, c03] = request.security(s03, timeframe.period, screenerFunc()) 
+[v04, c04] = request.security(s04, timeframe.period, screenerFunc()) 
+[v05, c05] = request.security(s05, timeframe.period, screenerFunc()) 
+[v06, c06] = request.security(s06, timeframe.period, screenerFunc()) 
+[v07, c07] = request.security(s07, timeframe.period, screenerFunc()) 
+[v08, c08] = request.security(s08, timeframe.period, screenerFunc()) 
+[v09, c09] = request.security(s09, timeframe.period, screenerFunc()) 
+[v10, c10] = request.security(s10, timeframe.period, screenerFunc()) 
+[v11, c11] = request.security(s11, timeframe.period, screenerFunc()) 
+[v12, c12] = request.security(s12, timeframe.period, screenerFunc()) 
+[v13, c13] = request.security(s13, timeframe.period, screenerFunc()) 
+[v14, c14] = request.security(s14, timeframe.period, screenerFunc()) 
+[v15, c15] = request.security(s15, timeframe.period, screenerFunc()) 
+[v16, c16] = request.security(s16, timeframe.period, screenerFunc())
+[v17, c17] = request.security(s17, timeframe.period, screenerFunc()) 
+[v18, c18] = request.security(s18, timeframe.period, screenerFunc()) 
+[v19, c19] = request.security(s19, timeframe.period, screenerFunc()) 
+[v20, c20] = request.security(s20, timeframe.period, screenerFunc()) 
+[v21, c21] = request.security(s21, timeframe.period, screenerFunc()) 
+[v22, c22] = request.security(s22, timeframe.period, screenerFunc()) 
+[v23, c23] = request.security(s23, timeframe.period, screenerFunc()) 
+[v24, c24] = request.security(s24, timeframe.period, screenerFunc()) 
+[v25, c25] = request.security(s25, timeframe.period, screenerFunc()) 
+[v26, c26] = request.security(s26, timeframe.period, screenerFunc()) 
+[v27, c27] = request.security(s27, timeframe.period, screenerFunc()) 
+[v28, c28] = request.security(s28, timeframe.period, screenerFunc()) 
+[v29, c29] = request.security(s29, timeframe.period, screenerFunc()) 
+[v30, c30] = request.security(s30, timeframe.period, screenerFunc()) 
+[v31, c31] = request.security(s31, timeframe.period, screenerFunc()) 
+[v32, c32] = request.security(s32, timeframe.period, screenerFunc()) 
+[v33, c33] = request.security(s33, timeframe.period, screenerFunc()) 
+[v34, c34] = request.security(s34, timeframe.period, screenerFunc()) 
+[v35, c35] = request.security(s35, timeframe.period, screenerFunc()) 
+[v36, c36] = request.security(s36, timeframe.period, screenerFunc()) 
+[v37, c37] = request.security(s37, timeframe.period, screenerFunc()) 
+[v38, c38] = request.security(s38, timeframe.period, screenerFunc()) 
+[v39, c39] = request.security(s39, timeframe.period, screenerFunc()) 
+[v40, c40] = request.security(s40, timeframe.period, screenerFunc()) 
+ 
+//////////////////// 
+// Screener label // 
+ 
+scr_label = '' 
+ 
+// Compose a screener message 
+scr_label := c01 ? scr_label + s01 + ' ' + str.tostring(roundn(v01, 2)) + '\n' : scr_label 
+scr_label := c02 ? scr_label + s02 + ' ' + str.tostring(roundn(v02, 2)) + '\n' : scr_label 
+scr_label := c03 ? scr_label + s03 + ' ' + str.tostring(roundn(v03, 2)) + '\n' : scr_label 
+scr_label := c04 ? scr_label + s04 + ' ' + str.tostring(roundn(v04, 2)) + '\n' : scr_label 
+scr_label := c05 ? scr_label + s05 + ' ' + str.tostring(roundn(v05, 2)) + '\n' : scr_label 
+scr_label := c06 ? scr_label + s06 + ' ' + str.tostring(roundn(v06, 2)) + '\n' : scr_label 
+scr_label := c07 ? scr_label + s07 + ' ' + str.tostring(roundn(v07, 2)) + '\n' : scr_label 
+scr_label := c08 ? scr_label + s08 + ' ' + str.tostring(roundn(v08, 2)) + '\n' : scr_label 
+scr_label := c09 ? scr_label + s09 + ' ' + str.tostring(roundn(v09, 2)) + '\n' : scr_label 
+scr_label := c10 ? scr_label + s10 + ' ' + str.tostring(roundn(v10, 2)) + '\n' : scr_label 
+scr_label := c11 ? scr_label + s11 + ' ' + str.tostring(roundn(v11, 2)) + '\n' : scr_label 
+scr_label := c12 ? scr_label + s12 + ' ' + str.tostring(roundn(v12, 2)) + '\n' : scr_label 
+scr_label := c13 ? scr_label + s13 + ' ' + str.tostring(roundn(v13, 2)) + '\n' : scr_label 
+scr_label := c14 ? scr_label + s14 + ' ' + str.tostring(roundn(v14, 2)) + '\n' : scr_label 
+scr_label := c15 ? scr_label + s15 + ' ' + str.tostring(roundn(v15, 2)) + '\n' : scr_label 
+scr_label := c16 ? scr_label + s16 + ' ' + str.tostring(roundn(v16, 2)) + '\n' : scr_label 
+scr_label := c17 ? scr_label + s17 + ' ' + str.tostring(roundn(v17, 2)) + '\n' : scr_label 
+scr_label := c18 ? scr_label + s18 + ' ' + str.tostring(roundn(v18, 2)) + '\n' : scr_label 
+scr_label := c19 ? scr_label + s19 + ' ' + str.tostring(roundn(v19, 2)) + '\n' : scr_label 
+scr_label := c20 ? scr_label + s20 + ' ' + str.tostring(roundn(v20, 2)) + '\n' : scr_label 
+scr_label := c21 ? scr_label + s21 + ' ' + str.tostring(roundn(v21, 2)) + '\n' : scr_label 
+scr_label := c22 ? scr_label + s22 + ' ' + str.tostring(roundn(v22, 2)) + '\n' : scr_label
+scr_label := c23 ? scr_label + s23 + ' ' + str.tostring(roundn(v23, 2)) + '\n' : scr_label 
+scr_label := c24 ? scr_label + s24 + ' ' + str.tostring(roundn(v24, 2)) + '\n' : scr_label 
+scr_label := c25 ? scr_label + s25 + ' ' + str.tostring(roundn(v25, 2)) + '\n' : scr_label 
+scr_label := c26 ? scr_label + s26 + ' ' + str.tostring(roundn(v26, 2)) + '\n' : scr_label 
+scr_label := c27 ? scr_label + s27 + ' ' + str.tostring(roundn(v27, 2)) + '\n' : scr_label 
+scr_label := c28 ? scr_label + s28 + ' ' + str.tostring(roundn(v28, 2)) + '\n' : scr_label 
+scr_label := c29 ? scr_label + s29 + ' ' + str.tostring(roundn(v29, 2)) + '\n' : scr_label 
+scr_label := c30 ? scr_label + s30 + ' ' + str.tostring(roundn(v30, 2)) + '\n' : scr_label 
+scr_label := c31 ? scr_label + s31 + ' ' + str.tostring(roundn(v31, 2)) + '\n' : scr_label 
+scr_label := c32 ? scr_label + s32 + ' ' + str.tostring(roundn(v32, 2)) + '\n' : scr_label 
+scr_label := c33 ? scr_label + s33 + ' ' + str.tostring(roundn(v33, 2)) + '\n' : scr_label 
+scr_label := c34 ? scr_label + s34 + ' ' + str.tostring(roundn(v34, 2)) + '\n' : scr_label 
+scr_label := c35 ? scr_label + s35 + ' ' + str.tostring(roundn(v35, 2)) + '\n' : scr_label 
+scr_label := c36 ? scr_label + s36 + ' ' + str.tostring(roundn(v36, 2)) + '\n' : scr_label 
+scr_label := c37 ? scr_label + s37 + ' ' + str.tostring(roundn(v37, 2)) + '\n' : scr_label 
+scr_label := c38 ? scr_label + s38 + ' ' + str.tostring(roundn(v38, 2)) + '\n' : scr_label 
+scr_label := c39 ? scr_label + s39 + ' ' + str.tostring(roundn(v39, 2)) + '\n' : scr_label 
+scr_label := c40 ? scr_label + s40 + ' ' + str.tostring(roundn(v40, 2)) + '\n' : scr_label 
+ 
+ 
+ 
+var panel = table.new(position = position.top_right,columns = 10,rows = 10,bgcolor = color.green,frame_color = color.black,border_color = color.red) 
+ 
+ 
+ 
+if barstate.islast 
+    table.cell(panel,0,0,text = str.tostring(scr_label))
+	
